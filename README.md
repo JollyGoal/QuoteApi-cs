@@ -1,4 +1,5 @@
 # "Quotes" REST API
+I made this project with literally zero knowledge in both C# and .NET so let's see if Github Copilot can help me with my task.
 
 ### Functional requirements for the API:
 
