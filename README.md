@@ -3,7 +3,7 @@ I made this project with literally zero knowledge in both C# and .NET so let's s
 
 ### Functional requirements for the API:
 
-- [ ] Create a quote with following fields: author, quote, category.
+- [x] Create a quote with following fields: author, quote, category.
 - [ ] Edit/Change quote: author, quote, category.
 - [ ] Delete a quote by ID.
 - [ ] Get all quotes.

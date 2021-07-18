@@ -12,9 +12,9 @@ namespace QuoteApi_cs.Repositories
         // get a quote by Id
         Task<Quote> GetQuoteById(long id);
         // add a quote
-        Task<Quote> AddQuote(Quote quote);
+        Task<List<Quote>> AddQuote(QuotePayload quotePayload);
         // update a quote
-        Task<Quote> UpdateQuote(Quote quote);
+        Task<Quote> UpdateQuote(long id, QuotePayload quotePayload);
         // delete a quote by Id
         Task<bool> DeleteQuoteById(long id);
         // get all quotes by Category

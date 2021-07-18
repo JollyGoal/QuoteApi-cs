@@ -27,16 +27,34 @@ namespace QuoteApi_cs.Repositories
             return await Task.Run(() => { return _quotes.Find(q => q.Id == id); });
         }
 
-        // add a quote
-        public async Task<Quote> AddQuote(Quote quote)
+        // add a Quote from QuotePayload
+        public async Task<List<Quote>> AddQuote(QuotePayload payload)
         {
-            return await Task.Run(() => { _quotes.Add(quote); return quote; });
+            return await Task.Run(() =>
+            {
+                // get Id of latest Quote in _quotes
+                long id = _quotes.Count > 0 ? _quotes[_quotes.Count - 1].Id + 1 : 1;
+
+                // create new Quote
+                Quote quote = new Quote() { Id = id, Text = payload.Text, Author = payload.Author, Category = payload.Category };
+                // add to _quotes
+                _quotes.Add(quote);
+                return _quotes;
+            });
         }
 
-        // update a quote
-        public async Task<Quote> UpdateQuote(Quote quote)
+        // update a quote by id
+        public async Task<Quote> UpdateQuote(long id, QuotePayload quote)
         {
-            return await Task.Run(() => { _quotes.Remove(quote); _quotes.Add(quote); return quote; });
+            return await Task.Run(() =>
+            {
+                var match = _quotes.Find(q => q.Id == id);
+                // change Author, Text and Category of mathc object
+                match.Author = quote.Author;
+                match.Text = quote.Text;
+                match.Category = quote.Category;
+                return match;
+            });
         }
 
         // delete a quote by Id
