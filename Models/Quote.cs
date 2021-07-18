@@ -12,6 +12,7 @@ namespace QuoteApi_cs.Models
         public Author Author { get; set; }
         // datetime of the quote with default value of current time
         public DateTime DateTime { get; set; } = DateTime.Now;
-
+        // category of the quote
+        public Category Category { get; set; }
     }
 }
