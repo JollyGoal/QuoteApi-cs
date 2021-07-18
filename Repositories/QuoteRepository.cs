@@ -10,8 +10,8 @@ namespace QuoteApi_cs.Repositories
     public class QuoteRepository : IQuoteRepository
     {
         // Add your QuoteApi_cs.Models.Quote objects here
-        private readonly QuoteContext _context;
-        public QuoteRepository(QuoteContext context)
+        private readonly ApplicationContext _context;
+        public QuoteRepository(ApplicationContext context)
         {
             _context = context;
         }
@@ -20,13 +20,13 @@ namespace QuoteApi_cs.Repositories
         // get all quotes
         public async Task<IEnumerable<Quote>> GetQuotes()
         {
-            return await _context.Quotes.ToListAsync();
+            return await _context.Quotes.Include("Author").Include("Category").ToListAsync();
         }
 
         // get a quote by id
         public async Task<Quote> GetQuoteById(long id)
         {
-            return await _context.Quotes.FindAsync(id);
+            return await _context.Quotes.Include("Author").Include("Category").FirstOrDefaultAsync(e => e.Id == id);
         }
 
         // add a Quote from QuotePayload
@@ -35,6 +35,18 @@ namespace QuoteApi_cs.Repositories
             // get id of last inserted quote
             Quote lastQuote = await _context.Quotes.OrderByDescending(q => q.Id).FirstOrDefaultAsync();
             long newId = lastQuote == null ? 0 : lastQuote.Id + 1;
+
+            // handle foreign key constraints for author and category
+            Author author = await _context.Authors.FirstOrDefaultAsync(a => a.Id == payload.AuthorId);
+            Category category = await _context.Categories.FirstOrDefaultAsync(c => c.Id == payload.CategoryId);
+            if (author == null)
+            {
+                throw new ArgumentException($"Author with id {payload.AuthorId} does not exist");
+            }
+            if (category == null)
+            {
+                throw new ArgumentException($"Category with id {payload.CategoryId} does not exist");
+            }
 
             Quote quote = new Quote()
             {

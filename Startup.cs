@@ -31,7 +31,7 @@ namespace QuoteApi_cs
         {
             services.AddScoped<IQuoteRepository, QuoteRepository>();
             services.AddControllers();
-            services.AddDbContext<QuoteContext>(opt =>
+            services.AddDbContext<ApplicationContext>(opt =>
                                                opt.UseInMemoryDatabase("QuotesList"));
             services.AddSwaggerGen(c =>
             {
