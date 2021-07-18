@@ -2,14 +2,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace QuoteApi_cs.Models
 {
-    public class QuoteContext : DbContext
+    public class AuthorContext : DbContext
     {
-        public QuoteContext(DbContextOptions<QuoteContext> options)
+        public AuthorContext(DbContextOptions<QuoteContext> options)
             : base(options)
         {
             Database.EnsureCreated();
         }
 
-        public DbSet<Quote> Quotes { get; set; }
+        public DbSet<Quote> Authors { get; set; }
     }
 }

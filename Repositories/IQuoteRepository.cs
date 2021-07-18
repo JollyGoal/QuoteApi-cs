@@ -8,11 +8,11 @@ namespace QuoteApi_cs.Repositories
     public interface IQuoteRepository
     {
         // get all quotes
-        Task<List<Quote>> GetQuotes();
+        Task<IEnumerable<Quote>> GetQuotes();
         // get a quote by Id
         Task<Quote> GetQuoteById(long id);
         // add a quote
-        Task<List<Quote>> AddQuote(QuotePayload quotePayload);
+        Task<Quote> AddQuote(QuotePayload quotePayload);
         // update a quote
         Task<Quote> UpdateQuote(long id, QuotePayload quotePayload);
         // delete a quote by Id

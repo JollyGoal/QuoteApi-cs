@@ -18,7 +18,7 @@ namespace QuoteApi_cs.Controllers
 
         // GET api/quote
         [HttpGet]
-        public async Task<List<Quote>> Get()
+        public async Task<IEnumerable<Quote>> Get()
         {
             return await _quoteRepository.GetQuotes();
         }
@@ -32,67 +32,18 @@ namespace QuoteApi_cs.Controllers
 
         // POST api/quote
         [HttpPost]
-        public async Task<ActionResult<List<Quote>>> Post([FromBody] QuotePayload quote)
+        public async Task<ActionResult<Quote>> Post([FromBody] QuotePayload quote)
         {
-            return await _quoteRepository.AddQuote(quote);
+            Quote newQuote = await _quoteRepository.AddQuote(quote);
+            return CreatedAtAction(nameof(Get), new { id = newQuote.Id }, newQuote);
         }
 
         // PUT api/quote/{id}
         [HttpPut("{id}")]
         public async Task<ActionResult<Quote>> Put(long id, [FromBody] QuotePayload quote)
         {
-            return await _quoteRepository.UpdateQuote(id, quote);
+            Quote updatedQuote = await _quoteRepository.UpdateQuote(id, quote);
+            return Ok(updatedQuote);
         }
-
-        // private readonly ITodoItemRepository _todoItemsRepository;
-        // public TodoItemsController(ITodoItemRepository todoItemsRepository)
-        // {
-        //     _todoItemsRepository = todoItemsRepository;
-        // }
-
-        // [HttpGet]
-        // public async Task<IEnumerable<TodoItem>> GetTodoItems()
-        // {
-        //     return await _todoItemsRepository.Get();
-        // }
-
-        // [HttpGet("{id}")]
-        // public async Task<ActionResult<TodoItem>> GetTodoItems(long id)
-        // {
-        //     return await _todoItemsRepository.Get(id);
-        // }
-
-        // [HttpPost]
-        // public async Task<ActionResult<TodoItem>> PostTodoItems([FromBody] TodoItem todoItem)
-        // {
-        //     var newTodoItem = await _todoItemsRepository.Create(todoItem);
-        //     return CreatedAtAction(nameof(GetTodoItems), new { id = todoItem.Id }, newTodoItem);
-        // }
-
-        // [HttpPut]
-        // public async Task<ActionResult> PutTodoItems(long id, [FromBody] TodoItem todoItem)
-        // {
-        //     if (todoItem.Id != id)
-        //     {
-        //         return BadRequest();
-        //     }
-        //     await _todoItemsRepository.Update(todoItem);
-        //     return NoContent();
-        // }
-
-        // // DELETE api/TodoItems/{id}
-        // [HttpDelete("{id}")]
-        // public async Task<ActionResult> DeleteTodoItems(long id)
-        // {
-        //     // check if the todo item exists
-        //     var todoItem = await _todoItemsRepository.Get(id);
-        //     if (todoItem == null)
-        //     {
-        //         return NotFound();
-        //     }
-
-        //     await _todoItemsRepository.Delete(id);
-        //     return NoContent();
-        // }
     }
 }
