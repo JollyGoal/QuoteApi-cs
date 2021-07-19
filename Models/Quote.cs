@@ -10,13 +10,13 @@ namespace QuoteApi_cs.Models
         // quote text
         public string Text { get; set; }
         // author of the quote
-        [ForeignKey("AuthorId")]
-        public long AuthorId { get; protected set; }
-        public Author Author { get; set; }
+        [ForeignKey("Author")]
+        public long AuthorId { get; set; }
+        public virtual Author Author { get; set; }
         // category of the quote
-        [ForeignKey("CategoryId")]
-        public long CategoryId { get; protected set; }
-        public Category Category { get; set; }
+        [ForeignKey("Category")]
+        public long CategoryId { get; set; }
+        public virtual Category Category { get; set; }
     }
 
     public class Quote : QuotePayload

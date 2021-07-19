@@ -51,9 +51,9 @@ namespace QuoteApi_cs.Repositories
             Quote quote = new Quote()
             {
                 Id = newId,
-                Author = payload.Author,
+                Author = author,
                 Text = payload.Text,
-                Category = payload.Category,
+                Category = category,
             };
 
             _context.Quotes.Add(quote);
