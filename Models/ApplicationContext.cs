@@ -13,5 +13,6 @@ namespace QuoteApi_cs.Models
         public DbSet<Quote> Quotes { get; set; }
         public DbSet<Author> Authors { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Subscriber> Subscribers { get; set; }
     }
 }

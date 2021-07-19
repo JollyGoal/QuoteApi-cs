@@ -26,17 +26,17 @@ namespace QuoteApi_cs.Services
         {
             while (!stoppingToken.IsCancellationRequested)
             {
+                _logger.LogInformation("Old quotes collector worker started.");
+
                 bool DEBUG = true;  // change to false for production
                 if (DEBUG)
                 {
-                    _logger.LogInformation("Collecting Quote");
-
                     // get all quotes for debug purposes
                     IEnumerable<Quote> quotes = await _quoteRepository.GetQuotes();
                     // log all elements of the enumerable
                     foreach (Quote quote in quotes)
                     {
-                        _logger.LogInformation($"Quote: {quote.Id} - {quote.Text}");
+                        _logger.LogDebug($"Quote: {quote.Id} - {quote.Text}");
                     }
                 }
 

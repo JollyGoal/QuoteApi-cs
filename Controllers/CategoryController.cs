@@ -45,5 +45,13 @@ namespace QuoteApi_cs.Controllers
             Category updatedCategory = await _CategoriesRepository.UpdateCategory(Category);
             return Ok(updatedCategory);
         }
+
+        // DELETE api/Category/{id}
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Category>> Delete(long id)
+        {
+            await _CategoriesRepository.DeleteCategoryById(id);
+            return Ok();
+        }
     }
 }

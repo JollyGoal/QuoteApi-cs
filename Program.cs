@@ -28,6 +28,7 @@ namespace QuoteApi_cs
                 .ConfigureServices((hostContext, services) =>
                 {
                     services.AddHostedService<QuoteCollector>();
+                    services.AddHostedService<QuotesSubReseller>();
                 });
     }
 }

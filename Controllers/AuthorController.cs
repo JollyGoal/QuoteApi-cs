@@ -45,5 +45,13 @@ namespace QuoteApi_cs.Controllers
             Author updatedAuthor = await _authorsRepository.UpdateAuthor(author);
             return Ok(updatedAuthor);
         }
+
+        // DELETE api/author/{id}
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Author>> Delete(long id)
+        {
+            await _authorsRepository.DeleteAuthorById(id);
+            return Ok();
+        }
     }
 }

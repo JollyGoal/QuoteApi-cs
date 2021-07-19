@@ -60,5 +60,13 @@ namespace QuoteApi_cs.Controllers
             Quote updatedQuote = await _quoteRepository.UpdateQuote(id, quote);
             return Ok(updatedQuote);
         }
+
+        // DELETE api/quote/{id}
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Quote>> Delete(long id)
+        {
+            await _quoteRepository.DeleteQuoteById(id);
+            return Ok();
+        }
     }
 }
