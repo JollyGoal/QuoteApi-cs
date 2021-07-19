@@ -12,5 +12,7 @@ namespace QuoteApi_cs.Repositories
         Task Unsubscribe(long id);
         // get all subscribers
         Task<IEnumerable<Subscriber>> GetAllSubscribers();
+        // send a message to a subscribers
+        Task SendMessage(Subscriber subscriber, string message);
     }
 }

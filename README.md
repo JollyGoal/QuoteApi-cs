@@ -11,7 +11,8 @@ I made this project with literally zero knowledge in both C# and .NET so let's s
 - [x] Get a random quote.
 - [x] Create a worker that wakes up every 5 minutes and deletes quotes that were created more than 24 hour ago.
 - [x] Create a feature where users can subscribe for receiving daily quotes by providing their email or phone number. 
-- [ ] Create a worker that sends daily quotes via email or SMS based on users preference
+- [x] Create a worker that sends daily quotes via email or SMS based on users preference
+- [ ] Find and implement free API services to send messages to users via phone number and connect smtp
 - [x] Add Swagger documentation for the API
 
 ### Pins

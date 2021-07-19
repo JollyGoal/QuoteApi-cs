@@ -44,6 +44,12 @@ namespace QuoteApi_cs.Services
                     message += quote.Author.Name + " - " + quote.Category.Name + ": " + quote.Text + "\n";
                 }
 
+                // send to subscribers
+                foreach (Subscriber subscriber in subscribers)
+                {
+                    await _subscriberRepository.SendMessage(subscriber, message);
+                }
+
                 // run the task each 24 hours
                 // await Task.Delay(TimeSpan.FromHours(24), stoppingToken);
                 await Task.Delay(2000, stoppingToken);
