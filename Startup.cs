@@ -30,6 +30,7 @@ namespace QuoteApi_cs
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IQuoteRepository, QuoteRepository>();
+            services.AddScoped<IAuthorRepository, AuthorRepository>();
             services.AddControllers();
             services.AddDbContext<ApplicationContext>(opt =>
                                                opt.UseInMemoryDatabase("QuotesList"));
