@@ -86,7 +86,7 @@ namespace QuoteApi_cs.Repositories
         }
 
         // get all quotes by category
-        public async Task<List<Quote>> GetQuotesByCategory(Category category)
+        public async Task<IEnumerable<Quote>> GetQuotesByCategory(Category category)
         {
             return await _context.Quotes.Where(q => q.Category == category).ToListAsync();
         }
@@ -95,6 +95,18 @@ namespace QuoteApi_cs.Repositories
         public async Task<Quote> GetRandomQuote()
         {
             return await _context.Quotes.OrderBy(q => Guid.NewGuid()).FirstOrDefaultAsync();
+        }
+
+        // drop quotes that are older than a parameter DateTime field
+        public async Task<IEnumerable<Quote>> DropQuotesOlderThan(DateTime olderThan)
+        {
+            IEnumerable<Quote> quotesToDelete = await _context.Quotes.Where(q => q.DateTime < olderThan).ToListAsync();
+            foreach (var quote in quotesToDelete)
+            {
+                _context.Quotes.Remove(quote);
+            }
+            await _context.SaveChangesAsync();
+            return quotesToDelete;
         }
     }
 }

@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
+using QuoteApi_cs.Services;
+using QuoteApi_cs.Repositories;
 
 namespace QuoteApi_cs
 {
@@ -21,6 +24,10 @@ namespace QuoteApi_cs
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                })
+                .ConfigureServices((hostContext, services) =>
+                {
+                    services.AddHostedService<QuoteCollector>();
                 });
     }
 }

@@ -19,3 +19,9 @@ I made this project with literally zero knowledge in both C# and .NET so let's s
   * Language of development C# on .NET Core
   * Data exchange format between client and server is JSON
   * All data is stored in an in-memory database.
+
+### Launch Project
+
+```shell
+dotnet run
+```
