@@ -31,6 +31,20 @@ namespace QuoteApi_cs.Controllers
             return await _quoteRepository.GetQuoteById(id);
         }
 
+        // GET api/quote/{category}
+        [HttpGet("{category}")]
+        public async Task<IEnumerable<Quote>> GetByCategory(Category category)
+        {
+            return await _quoteRepository.GetQuotesByCategory(category);
+        }
+
+        // GET api/quote/random
+        [HttpGet("random")]
+        public async Task<Quote> GetRandom()
+        {
+            return await _quoteRepository.GetRandomQuote();
+        }
+
         // POST api/quote
         [HttpPost]
         public async Task<ActionResult<Quote>> Post([FromBody] QuotePayload quote)
@@ -45,6 +59,14 @@ namespace QuoteApi_cs.Controllers
         {
             Quote updatedQuote = await _quoteRepository.UpdateQuote(id, quote);
             return Ok(updatedQuote);
+        }
+
+        // DELETE api/quote/{id}
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Quote>> Delete(long id)
+        {
+            await _quoteRepository.DeleteQuoteById(id);
+            return Ok();
         }
     }
 }
