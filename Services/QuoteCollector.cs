@@ -18,7 +18,6 @@ namespace QuoteApi_cs.Services
         public QuoteCollector(IServiceProvider serviceProvider, ILogger<QuoteCollector> logger)
         {
             _logger = logger;
-            // _quoteRepository = quoteRepository;
             _quoteRepository = serviceProvider.CreateScope().ServiceProvider.GetRequiredService<IQuoteRepository>();
         }
 
